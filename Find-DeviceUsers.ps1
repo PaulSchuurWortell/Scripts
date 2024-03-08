@@ -1,4 +1,4 @@
-﻿enum returnMode {
+enum returnMode {
     AllDevices
     AllUsers
     Inner
@@ -74,17 +74,14 @@ function Find-DeviceUsers {
     )
 
     Begin {
-
         # Import the Intune PowerShell SDK module
         Import-Module Microsoft.Graph.Intune
 
         # Connect to the Microsoft Graph with your credentials
         Connect-MSGraph -Quiet 
-
-    } #begin
+    } 
 
     Process {
-
         # Query the Intune managed devices using the Graph API
         $devices = @()
         $nextLink = "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices"
@@ -114,15 +111,9 @@ function Find-DeviceUsers {
             Full {$DeviceUsers=Join-Object -LeftObject $devices -RightObject $users -On userPrincipalName -JoinType Full }
             Inner {$DeviceUsers=Join-Object -LeftObject $devices -RightObject $users -On userPrincipalName -JoinType Inner }
         }
- 
-    
-
-
-    } #process
+    } 
 
     End {
-
         return $DeviceUsers 
-    } #end
-
-} #close Find-DeviceOwners
+    } 
+} 
